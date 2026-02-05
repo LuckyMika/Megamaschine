@@ -12,4 +12,13 @@ function isNumber(input: string): boolean {
 	return input.charCodeAt(0) >= "0".charCodeAt(0) && input.charCodeAt(0) <= "9".charCodeAt(0);
 }
 
-export { isLetter, isNumber }
+
+function isEnumKey<
+	E extends Record<string, string | number>>(
+		e: E,
+		key: string
+	): key is Extract<keyof E, string> {
+	return key in e
+}
+
+export { isLetter, isNumber, isEnumKey }
