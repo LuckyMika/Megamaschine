@@ -70,8 +70,13 @@ enum Mnemonic {
 
 	// Control Flow Operations
 	COMP,
-	JUMP,
-
+	JMP,
+	JEQ,
+	JGE,
+	JLE,
+	JGT,
+	JLT,
+	JOF,
 }
 
 enum TokenType {
