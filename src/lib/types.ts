@@ -41,7 +41,6 @@ enum Mnemonic {
 
 	// Memory Operations
 	MOVE,
-	READ,
 
 	// Stack Operations
 	PUSH,
@@ -69,9 +68,10 @@ enum Mnemonic {
 	ROTR,
 
 	// Control Flow Operations
-	COMP,
+	CMP,
 	JMP,
 	JEQ,
+	JNE,
 	JGE,
 	JLE,
 	JGT,
@@ -87,15 +87,19 @@ enum TokenType {
 	COMMA,
 	COLON,
 	COMMENT,
+	LINEBREAK,
 }
+
+const BASE_PREFIXES = ["b", "", "$", "#"] as const;
 
 type Token =
 	| { type: TokenType.IDENTIFIER, value: string }
 	| { type: TokenType.LITERAL, value: string }
-	| { type: TokenType.BASE, value: "#" | "$" | "b" | "" }
+	| { type: TokenType.BASE, value: typeof BASE_PREFIXES[number] }
 	| { type: TokenType.DEREF, value: "*" }
 	| { type: TokenType.COMMA, value: "," }
 	| { type: TokenType.COLON, value: ":" }
 	| { type: TokenType.COMMENT, value: string }
+	| { type: TokenType.LINEBREAK, value: "\n" }
 
-export { type Token, TokenType, Mnemonic, Flags, RegisterFile, RegisterName }
+export { type Token, TokenType, Mnemonic, Flags, RegisterFile, RegisterName, BASE_PREFIXES }
