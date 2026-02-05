@@ -154,7 +154,7 @@ class Parser {
 				return { mnemonic: mnemonic }
 			}
 
-			throw new Error(`Unrecognised mnemonic ${mnemonic_string}`);
+			throw new Error(`Unhandled mnemonic ${mnemonic_string}`);
 		} else {
 			throw new Error(`Unrecognised mnemonic ${mnemonic_string}`);
 		}
