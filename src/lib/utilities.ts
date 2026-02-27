@@ -1,4 +1,4 @@
-import type { BASE_PREFIXES, Token, TokenType } from "./types";
+import type { BASE_PREFIXES } from "./types";
 
 function isLetter(input: string): boolean {
 	if (input.length != 1) return false;
