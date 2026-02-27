@@ -1,9 +1,9 @@
 import { Mnemonic, RegisterName, TokenType, type Token } from "./types";
 import { isEnumKey, stringToBase } from "./utilities";
 
-type Program = Line[]
+export type Program = Line[]
 
-type Line = {
+export type Line = {
 	type: "label",
 	value: string,
 } | {
@@ -11,13 +11,13 @@ type Line = {
 	value: Instruction,
 }
 
-type Instruction = {
+export type Instruction = {
 	mnemonic: Mnemonic,
 	operand1?: Operand,
 	operand2?: Operand,
 }
 
-type Operand = {
+export type Operand = {
 	type: "literal",
 	value: number,
 } | {
@@ -29,6 +29,12 @@ type Operand = {
 } | {
 	type: "literal_reference",
 	value: number,
+} | {
+	type: "label",
+	value: string
+} | {
+	type: "label_reference",
+	value: string
 }
 
 class Parser {
@@ -194,7 +200,7 @@ class Parser {
 					return { type: "register_reference", value: RegisterName[next.value] }
 				}
 
-				throw new Error(`Invalid register name, got ${next.value}`);
+				return { type: "label_reference", value: token.value }
 			} else {
 				throw new Error(`Invalid operand format, got ${token.type}`);
 			}
@@ -208,7 +214,7 @@ class Parser {
 				return { type: "register", value: RegisterName[token.value] }
 			}
 
-			throw new Error(`Invalid register name, got ${token.value}`);
+			return { type: "label", value: token.value }
 		}
 
 
